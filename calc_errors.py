@@ -103,7 +103,7 @@ def get_trt_output(context, buffers, img, img_size, num_classes):
 
 
 if __name__ == "__main__":
-    engine_path = "weights/yolov4_fp32.engine"
+    engine_path = "weights/yolov4.trt"
     image_path = "./data/dog.jpg"
     image_size = (416, 416)
     num_classes = 80

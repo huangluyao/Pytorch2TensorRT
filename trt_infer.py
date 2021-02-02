@@ -98,7 +98,7 @@ def trt_detect(context, buffers, img, img_size, num_classes):
 
 
 if __name__ == "__main__":
-    engine_path = "weights/yolov4_fp32.engine"
+    engine_path = "weights/yolov4.trt"
     image_path = "./data/dog.jpg"
     image_size = (416, 416)
     num_classes = 80
@@ -119,4 +119,4 @@ if __name__ == "__main__":
             cv2.imshow("src", image)
             cv2.waitKey(10)
 
-        print(np.mean(np.array(infer_times[1:])))
+        print("avg_inger_time:", np.mean(np.array(infer_times[1:])))
