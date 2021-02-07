@@ -1,0 +1,25 @@
+{
+    "model_name": "YOLO",
+    "pretrained":"./weights/yolov4.conv.137.pth",
+    "..weight": "./weights/yolov4-416.pth",
+    "n_classes": 1,
+    "anchors":  [[10,13], [11,10], [13,12], [13,16], [14,4], [14,14], [16,14], [20,18], [25,22]],
+
+    "dataset": "Bead_neg_dataset",
+    "image_h": 416,
+    "image_w": 416,
+    "train_label_path": "./dataset/Bead_neg_dataset/train.txt",
+    "test_label_path": "./dataset/Bead_neg_dataset/val.txt",
+    "augmentation_path": "./data/augmentation.json",
+    "use_pt_norm": "True",
+
+    "loss": {"loss":"crossentropyloss2D"},
+
+    "epochs": 120,
+
+    "lr": 1e-4,
+    "milestones": [40,80,120],
+    "batch_size": 2,
+    "num_workers": 8,
+    "gpu_ids": "0"
+}

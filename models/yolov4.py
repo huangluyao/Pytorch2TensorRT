@@ -656,3 +656,12 @@ class Yolov4(nn.Module):
         # 2. overwrite entries in the existing state dict
         model_dict.update(pretrained_dict)
         _model.load_state_dict(model_dict)
+
+
+    def set_infer(self):
+        self.head.inference = True
+        self.neek.inference = True
+
+    def set_train(self):
+        self.head.inference = False
+        self.neek.inference = False

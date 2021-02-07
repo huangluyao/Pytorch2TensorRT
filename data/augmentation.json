@@ -1,0 +1,53 @@
+{
+    "data":
+    {
+        "train":
+        {
+            "pipeline":
+            [
+                {"type": "Resize", "size": [416, 416],"prob": 1},
+                {"//": "WhiteBalance", "prob": 1},
+                {"//": "Blur", "blur_limit": [3, 7],"prob": 1},
+                {"//": "GlassBlur", "sigma": 0.7, "max_delta":4, "iterations":2, "prob": 0.2},
+                {"//": "HueSaturationValue", "prob": 0.2,"hue_shift_limit":5, "sat_shift_limit":5, "val_shift_limit": 5},
+                {"type": "HorizontalFlip", "prob": 0.5},
+                {"//": "MultiplicativeNoise", "prob": 0.3,"multiplier":[0.9, 1.1]},
+                {"//": "RandomGridShuffle", "prob": 0.2,"grid":[1, 2]},
+                {"//": "RandomGridShuffle", "prob": 0.2,"grid":[2, 1]},
+                {"//": "RandomGridShuffle", "prob": 0.4,"grid":[2, 2]},
+                {"//": "RandomBrightnessContrast", "prob": 0.2,"brightness_limit":0.1, "contrast_limit": 0.1},
+                {"//": "RandomCrop", "size": [416, 416],"prob": 1},
+                {"//": "CenterCrop", "size": [416, 416],"prob": 1},
+                {"//": "RandomFlip", "prob": 0.3},
+                {"type": "Rotate", "prob": 0.5, "limit": 5, "interpolation":"linear", "border_mode":"constant", "value":0},
+                {"//": "GridDistortion", "prob": 0.2,"num_steps":5, "distort_limit":0.3},
+                {"//": "CoarseDropout", "prob": 0.2, "max_height": 15, "max_width": 15,"max_holes":5},
+                {"//": "ChannelDropout", "prob": 0.3, "fill_value":0.9},
+                {"//": "ChannelShuffle", "prob": 0.2},
+                {"//": "GaussNoise", "mean": 0.5, "prob": 0.2},
+                {"//": "GaussianBlur", "blur_limit": [1, 3], "sigma_limit": 0, "prob": 0.2},
+                {"//": "CLAHE", "clip_limit": 10,"prob": 0.2},
+                {"//": "ColorJitter", "brightness": 0.2, "contrast": 0.2,
+                    "saturation": 0.2, "hue": 0.2, "prob": 0.3},
+                {"//": "Downscale", "scale_min":0.25, "scale_max":0.25,"prob": 0.2},
+                {"//": "ElasticTransform", "prob": 0.2},
+                {"//": "Equalize", "prob": 0.2},
+                {"//": "FancyPCA", "prob": 0.3, "alpha": 0.1},
+                {"//": "FromFloat", "prob": 0.3,"max_value": 0.95},
+                {"//": "CropNonEmptyMaskIfExists", "prob": 1, "size": [416, 416]},
+                {"..type": "ToFloat", "prob": 1, "max_value": 255},
+                {"..type": "Normalize", "mean":[0.3463863, 0.37250704, 0.3600399],"std":[0.32847458, 0.31706238, 0.31872892], "max_pixel_value": 255}
+            ]
+        },
+        "test":
+        {
+            "pipeline":
+            [
+                {"type": "Resize", "size":  [416, 416],"prob": 1},
+                {"//": "CenterCrop", "size": [416, 416],"prob": 1},
+                {"..type": "Normalize", "mean":[0.3463863, 0.37250704, 0.3600399],"std":[0.32847458, 0.31706238, 0.31872892], "max_pixel_value": 255},
+                {"..type": "ToFloat", "prob": 1, "max_value": 255}
+            ]
+        }
+    }
+}
